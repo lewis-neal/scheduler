@@ -28,6 +28,9 @@ state = {
     return (
       <div>
         <Calendar onChange={this.onChange} value={this.state.date} />
+        <ul>
+          {this.state.dates.map((date, id) => <li key={id}>{date.toDateString()}</li>)}
+        </ul>
       </div>
     );
   }
