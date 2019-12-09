@@ -32,7 +32,7 @@ state = {
   render() {
     return (
       <div>
-        <h1>{this.state.name || "Insert Name"}</h1>
+        <h2>{this.state.name || "Insert Name"}</h2>
         <label>Name</label>
         <input onChange={this.changeName} type="text"></input>
         <Calendar onChange={this.changeDate} value={this.state.date} />
