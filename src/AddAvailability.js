@@ -3,10 +3,11 @@ import Calendar from 'react-calendar';
 
 class AddAvailability extends Component {
 state = {
+    name: '',
     dates: [],
   }
 
-  onChange = (date) => {
+  changeDate = (date) => {
     let dates = this.state.dates;
     let index = -1;
     dates.forEach((el, ind) => {
@@ -24,10 +25,17 @@ state = {
     this.setState({dates: dates});
   }
 
+  changeName = (event) => {
+    this.setState({name: event.target.value});
+  };
+
   render() {
     return (
       <div>
-        <Calendar onChange={this.onChange} value={this.state.date} />
+        <h1>{this.state.name || "Insert Name"}</h1>
+        <label>Name</label>
+        <input onChange={this.changeName} type="text"></input>
+        <Calendar onChange={this.changeDate} value={this.state.date} />
         <ul>
           {this.state.dates.map((date, id) => <li key={id}>{date.toDateString()}</li>)}
         </ul>
