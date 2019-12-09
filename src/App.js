@@ -1,30 +1,10 @@
 import React, { Component } from 'react';
-import Calendar from 'react-calendar';
 import logo from './logo.svg';
 import './App.css';
+import AddAvailability from './AddAvailability.js';
 
 class App extends Component {
-  state = {
-    dates: [],
-  }
-
-  onChange = (date) => {
-    let dates = this.state.dates;
-    let index = -1;
-    dates.forEach((el, ind) => {
-      if (el.getTime() === date.getTime()) {
-        index = ind;
-        return;
-      }
-    });
-    if (index === -1) {
-      this.setState({dates: [...dates, date]});
-      return;
-    }
-
-    dates.splice(index, 1);
-    this.setState({dates: dates});
-  }
+  
   render() {
     return (
       <div className="App">
@@ -35,9 +15,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <div>
-          <Calendar onChange={this.onChange} value={this.state.date} />
-        </div>
+        <AddAvailability />
       </div>
     );
   }
