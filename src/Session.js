@@ -40,7 +40,9 @@ class Session extends Component {
   getPeopleElement() {
     if (Object.entries(this.state.people).length > 0) {
       return (
-        Object.values(this.state.people).map((name, id) => <Person id={id} name={name} />)
+        Object.keys(this.state.people).map(
+          (id, key) => <Person key={key} id={id} dbRef={this.dbRef} name={this.state.people[id]} />
+        )
       );
     }
     return (null);
