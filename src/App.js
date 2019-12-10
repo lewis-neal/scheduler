@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import Homepage from './Homepage';
-import AddAvailability from './AddAvailability';
+import Session from './Session';
 
 class App extends Component {
   
@@ -15,7 +15,7 @@ class App extends Component {
           <h2>Welcome to React sir</h2>
         </div>
         <Router>
-          <Route path="/availability/:id" exact component={AddAvailability}/>
+          <Route path="/session/:id" exact component={Session}/>
           <Route path="/" exact component={Homepage}/>
         </Router>
       </div>

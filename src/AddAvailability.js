@@ -6,15 +6,13 @@ import { Redirect } from 'react-router-dom';
 class AddAvailability extends Component {
   constructor(props) {
     super();
-    let parsed = props.match.params;
     this.state = {
       name: '',
       dates: [],
-      id: typeof parsed.id !== 'undefined' ? parsed.id : '',
       redirect: false,
     };
 
-    this.dbRef = firebase.database().ref().child('sessions/' + parsed.id);
+    this.dbRef = firebase.database().ref().child('sessions/' + props.id);
   }
 
   changeDate = (date) => {

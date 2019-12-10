@@ -23,7 +23,7 @@ class CreateSession extends Component {
         'people': '',
       };
       let sessionId = this.dbRef.push(session).key;
-      let path = '/availability/' + sessionId;
+      let path = '/session/' + sessionId;
       return (
         <Redirect push to={path} />
       );
