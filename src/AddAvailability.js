@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 
 class AddAvailability extends Component {
-state = {
-    name: '',
-    dates: [],
+  constructor(props) {
+    super();
+    let parsed = props.match.params;
+    this.state = {
+      name: '',
+      dates: [],
+      id: typeof parsed.id !== 'undefined' ? parsed.id : '',
+    };
   }
 
   changeDate = (date) => {

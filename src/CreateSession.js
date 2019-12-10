@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import firebase from './Firebase';
 
 class CreateSession extends Component {
   constructor() {
     super();
+    this.dbRef = firebase.database().ref().child('sessions');
     this.state = {
       redirect: false,
     };
@@ -17,8 +19,13 @@ class CreateSession extends Component {
 
   render() {
     if (this.state.redirect) {
+      const session = {
+        'people': '',
+      };
+      let sessionId = this.dbRef.push(session).key;
+      let path = '/availability/' + sessionId;
       return (
-        <Redirect push to="/availability" />
+        <Redirect push to={path} />
       );
     }
 

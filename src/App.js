@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import Homepage from './Homepage';
@@ -16,7 +16,7 @@ class App extends Component {
         </div>
         <Router>
           <Homepage />
-          <Route path="/availability" exact component={AddAvailability}/>
+          <Route path="/availability/:id" exact component={AddAvailability}/>
         </Router>
       </div>
     );
