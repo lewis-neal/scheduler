@@ -53,8 +53,9 @@ class AddAvailability extends Component {
 
   render() {
     if (this.state.redirect) {
+      let path = '/session/' + this.props.id;
       return (
-        <Redirect push to="/" />
+        <Redirect push to={path} />
       );
     }
     return (

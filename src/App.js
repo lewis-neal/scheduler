@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Homepage from './Homepage';
 import Session from './Session';
+import AddAvailability from './AddAvailability';
 
 class App extends Component {
   
@@ -17,6 +18,7 @@ class App extends Component {
         <Router>
           <Route path="/session/:id" exact component={Session}/>
           <Route path="/" exact component={Homepage}/>
+          <Route path="/session/:id/availability" exact component={AddAvailability}/>
         </Router>
       </div>
     );
