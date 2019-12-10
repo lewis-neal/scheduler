@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
+import firebase from './Firebase';
+import { Redirect } from 'react-router-dom';
 
 class AddAvailability extends Component {
   constructor(props) {
@@ -9,7 +11,10 @@ class AddAvailability extends Component {
       name: '',
       dates: [],
       id: typeof parsed.id !== 'undefined' ? parsed.id : '',
+      redirect: false,
     };
+
+    this.dbRef = firebase.database().ref().child('sessions/' + parsed.id);
   }
 
   changeDate = (date) => {
@@ -34,7 +39,26 @@ class AddAvailability extends Component {
     this.setState({name: event.target.value});
   };
 
+  saveAvailability = () => {
+    let person = {
+      name: this.state.name,
+      dates: this.state.dates.map((date) => {
+        return date.toJSON();
+      }),
+    };
+
+    this.dbRef.child('people').push(person);
+    this.setState({
+      redirect: true,
+    });
+  };
+
   render() {
+    if (this.state.redirect) {
+      return (
+        <Redirect push to="/" />
+      );
+    }
     return (
       <div>
         <h2>{this.state.name || "Insert Name"}</h2>
@@ -44,6 +68,7 @@ class AddAvailability extends Component {
         <ul>
           {this.state.dates.map((date, id) => <li key={id}>{date.toDateString()}</li>)}
         </ul>
+        <button onClick={this.saveAvailability}>Save</button>
       </div>
     );
   }

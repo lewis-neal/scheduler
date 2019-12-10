@@ -15,8 +15,8 @@ class App extends Component {
           <h2>Welcome to React sir</h2>
         </div>
         <Router>
-          <Homepage />
           <Route path="/availability/:id" exact component={AddAvailability}/>
+          <Route path="/" exact component={Homepage}/>
         </Router>
       </div>
     );
