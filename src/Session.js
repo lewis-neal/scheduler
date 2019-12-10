@@ -51,6 +51,17 @@ class Session extends Component {
     return (null);
   }
 
+  getAvailableDates() {
+    if (Object.entries(this.state.dates).length > 0) {
+      return (
+        Object.keys(this.state.dates).map(
+          (id, key) => <li key={key}>{new Date(this.state.dates[id]).toDateString()}</li>
+        )
+      );
+    }
+    return (null);
+  }
+
   handleClick = () => {
     this.setState({
       redirect: true,
@@ -100,6 +111,8 @@ class Session extends Component {
       <div>
         {this.getPeopleElement()}
         <button onClick={this.handleClick}>Add Availability</button>
+        <h3>Dates that work:</h3>
+        {this.getAvailableDates()}
       </div>
     );
   }
