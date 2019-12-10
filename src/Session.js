@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import firebase from './Firebase';
 import Person from './Person';
+import { intersection } from './Utilities';
 
 class Session extends Component {
   constructor(props) {
@@ -21,13 +22,16 @@ class Session extends Component {
     this._isMounted = true;
     this.dbRef.on('value', (snapshot) => {
       let people = {};
+      let datesArr = [];
       const data = snapshot.val();
       Object.keys(data).forEach((key) => {
         people[key] = data[key].name;
+        datesArr.push(data[key].dates);
       });
       if (this._isMounted) {
         this.setState({
           people: people,
+          dates: this.intersection(...datesArr),
         });
       }
     });
