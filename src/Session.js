@@ -62,7 +62,7 @@ class Session extends Component {
   }
 
   getAvailableDates() {
-    if (Object.entries(this.state.dates).length > 0) {
+    if (typeof this.state.dates !== 'undefined' && Object.entries(this.state.dates).length > 0) {
       return (
         Object.keys(this.state.dates).map(
           (id, key) => <span key={key}><p>{new Date(this.state.dates[id]).toDateString()}</p></span>
