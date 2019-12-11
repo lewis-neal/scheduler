@@ -28,10 +28,16 @@ class Session extends Component {
         people[key] = data[key].name;
         datesArr.push(data[key].dates);
       });
+      let dates = datesArr;
+      if (dates.length > 1) {
+        dates = this.intersection(...datesArr);
+      } else {
+        dates = dates[0];
+      }
       if (this._isMounted) {
         this.setState({
           people: people,
-          dates: this.intersection(...datesArr),
+          dates: dates,
         });
       }
     });
