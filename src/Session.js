@@ -65,7 +65,7 @@ class Session extends Component {
     if (Object.entries(this.state.dates).length > 0) {
       return (
         Object.keys(this.state.dates).map(
-          (id, key) => <span><p key={key}>{new Date(this.state.dates[id]).toDateString()}</p></span>
+          (id, key) => <span key={key}><p>{new Date(this.state.dates[id]).toDateString()}</p></span>
         )
       );
     }
@@ -128,6 +128,7 @@ class Session extends Component {
         </div>
         <div className="session-div">
           <table>
+            <tbody>
             <tr>
               <td>
                 <h3 className="inline">People</h3>
@@ -139,6 +140,7 @@ class Session extends Component {
               </td>
             </tr>
             {this.getPeopleElement()}
+            </tbody>
           </table>
         </div>
         <div className="session-div">
