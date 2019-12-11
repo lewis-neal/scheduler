@@ -108,11 +108,20 @@ class Session extends Component {
       );
     }
     return (
-      <div>
-        {this.getPeopleElement()}
-        <button onClick={this.handleClick}>Add Availability</button>
-        <h3>Dates that work:</h3>
-        {this.getAvailableDates()}
+      <div className="row">
+        <div className="session-div">
+          <div>
+            <h3 className="inline">People</h3>
+            <div className="inline">
+              <button onClick={this.handleClick}>Add</button>
+            </div>
+          </div>
+          {this.getPeopleElement()}
+        </div>
+        <div className="session-div">
+          <h3>Dates that work:</h3>
+          {this.getAvailableDates()}
+        </div>
       </div>
     );
   }

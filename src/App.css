@@ -22,3 +22,14 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.column, .session-div {
+  float: left;
+  width: 50%;
+}
+
+.inline {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
