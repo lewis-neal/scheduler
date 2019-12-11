@@ -99,6 +99,7 @@ class AddAvailability extends Component {
     }
     return (
       <div>
+        <h1>Add Availability</h1>
         <h2>{this.state.name || "Insert Name"}</h2>
         <div className="availability-top">
           <label className="availability-label">Name</label>
