@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import firebase from './Firebase';
 import Person from './Person';
+import copy from 'copy-to-clipboard';
 
 class Session extends Component {
   constructor(props) {
@@ -60,6 +61,10 @@ class Session extends Component {
       );
     }
     return (null);
+  }
+
+  getUrl() {
+    copy(window.location.href);
   }
 
   handleClick = () => {
@@ -121,6 +126,9 @@ class Session extends Component {
         <div className="session-div">
           <h3>Dates that work:</h3>
           {this.getAvailableDates()}
+        </div>
+        <div>
+          <button onClick={this.getUrl}>Share</button>
         </div>
       </div>
     );
