@@ -51,7 +51,7 @@ class Session extends Component {
   }
 
   getPeopleElement() {
-    if (Object.entries(this.state.people).length > 0) {
+    if (typeof this.state.people !== 'undefined' && Object.entries(this.state.people).length > 0) {
       return (
         Object.keys(this.state.people).map(
           (id, key) => <Person key={key} id={id} dbRef={this.dbRef} name={this.state.people[id]} />
