@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import firebase from './Firebase';
 import { Redirect } from 'react-router-dom';
+import DateListing from './DateListing';
 
 class AddAvailability extends Component {
   constructor(props) {
@@ -43,22 +44,24 @@ class AddAvailability extends Component {
     this.setState({name: event.target.value});
   };
 
-  handleDates() {
+  displayRemoveAll() {
     if (typeof this.state.dates !== 'undefined' && Object.entries(this.state.dates).length > 0) {
-    return (
-        <div>
+      return (
+        <td>
           <button onClick={this.removeAllDates}>Remove All</button>
-          <ul>
-            {this.state.dates.map(
-              (date, id) =>
-              <li key={id}>{date.toDateString()} <button onClick={this.removeDate} value={id}>Remove</button></li>
-            )}
-          </ul>
-        </div>
+        </td>
+      );
+    }
+  }
+
+  handleDates = () => {
+    if (typeof this.state.dates !== 'undefined' && Object.entries(this.state.dates).length > 0) {
+      return (
+        this.state.dates.map((date, id) => <DateListing key={id} date={date} index={id} handleClick={this.removeDate} />)
       );
     }
 
-    return (<p>No dates currently selected</p>);
+    return (<tr><td><p>No dates currently selected</p></td></tr>);
   }
 
   removeAllDates = () => {
@@ -113,8 +116,17 @@ class AddAvailability extends Component {
             <Calendar onChange={this.changeDate} value={this.state.date} />
           </div>
           <div className="session-div">
-            <h3>Selected Dates</h3>
-            {this.handleDates()}
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <h3>Selected Dates</h3>
+                  </td>
+                  {this.displayRemoveAll()}
+                </tr>
+                {this.handleDates()}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
