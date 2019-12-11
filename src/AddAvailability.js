@@ -40,16 +40,25 @@ class AddAvailability extends Component {
   handleDates() {
     if (typeof this.state.dates !== 'undefined' && Object.entries(this.state.dates).length > 0) {
     return (
-        <ul>
-          {this.state.dates.map(
-            (date, id) =>
-            <li key={id}>{date.toDateString()} <button onClick={this.removeDate} value={id}>Remove</button></li>
-          )}
-        </ul>
+        <div>
+          <button onClick={this.removeAllDates}>Remove All</button>
+          <ul>
+            {this.state.dates.map(
+              (date, id) =>
+              <li key={id}>{date.toDateString()} <button onClick={this.removeDate} value={id}>Remove</button></li>
+            )}
+          </ul>
+        </div>
       );
     }
 
     return (<p>No dates currently selected</p>);
+  }
+
+  removeAllDates = () => {
+    this.setState({
+      dates: []
+    });
   }
 
   removeDate = (event) => {
@@ -97,8 +106,8 @@ class AddAvailability extends Component {
             <h3>Selected Dates</h3>
             {this.handleDates()}
           </div>
+          <button onClick={this.saveAvailability}>Save</button>
         </div>
-        <button onClick={this.saveAvailability}>Save</button>
       </div>
     );
   }
