@@ -15,6 +15,12 @@ class AddAvailability extends Component {
     this.dbRef = firebase.database().ref().child('sessions/' + props.match.params.id);
   }
 
+  backToSession = () => {
+    this.setState({
+      redirect: true,
+    });
+  }
+
   changeDate = (date) => {
     let dates = this.state.dates;
     let index = -1;
@@ -85,8 +91,8 @@ class AddAvailability extends Component {
   };
 
   render() {
+    let path = '/session/' + this.props.match.params.id;
     if (this.state.redirect) {
-      let path = '/session/' + this.props.match.params.id;
       return (
         <Redirect push to={path} />
       );
@@ -107,6 +113,7 @@ class AddAvailability extends Component {
             {this.handleDates()}
           </div>
           <button onClick={this.saveAvailability}>Save</button>
+          <button onClick={this.backToSession}>Cancel</button>
         </div>
       </div>
     );
