@@ -37,6 +37,18 @@ class AddAvailability extends Component {
     this.setState({name: event.target.value});
   };
 
+  handleDates() {
+    if (typeof this.state.dates !== 'undefined' && Object.entries(this.state.dates).length > 0) {
+    return (
+        <ul>
+          {this.state.dates.map((date, id) => <li key={id}>{date.toDateString()}</li>)}
+        </ul>
+      );
+    }
+
+    return (<p>No dates currently selected</p>);
+  }
+
   saveAvailability = () => {
     let person = {
       name: this.state.name,
@@ -61,12 +73,19 @@ class AddAvailability extends Component {
     return (
       <div>
         <h2>{this.state.name || "Insert Name"}</h2>
-        <label>Name</label>
-        <input onChange={this.changeName} type="text"></input>
-        <Calendar onChange={this.changeDate} value={this.state.date} />
-        <ul>
-          {this.state.dates.map((date, id) => <li key={id}>{date.toDateString()}</li>)}
-        </ul>
+        <div className="row">
+          <label>Name</label>
+          <input onChange={this.changeName} type="text"></input>
+        </div>
+        <div className="row">
+          <div className="session-div">
+            <Calendar onChange={this.changeDate} value={this.state.date} />
+          </div>
+          <div className="session-div">
+            <h3>Selected Dates</h3>
+            {this.handleDates()}
+          </div>
+        </div>
         <button onClick={this.saveAvailability}>Save</button>
       </div>
     );
