@@ -43,7 +43,7 @@ class AddAvailability extends Component {
         <ul>
           {this.state.dates.map(
             (date, id) =>
-            <li onClick={this.removeDate} key={id} value={id}>{date.toDateString()}</li>
+            <li key={id}>{date.toDateString()} <button onClick={this.removeDate} value={id}>Remove</button></li>
           )}
         </ul>
       );
