@@ -122,30 +122,39 @@ class Session extends Component {
       );
     }
     return (
-      <div className="row">
-        <div>
-          <button onClick={this.getUrl}>Share</button>
+      <div>
+        <h1>Scheduler</h1>
+        <div className="row">
+          <div className="session-top">
+            <h3>Share the link with people you're trying to organise with!</h3>
+            <div className="session-link-holder">
+              <input readOnly value={window.location.href} />
+              <button onClick={this.getUrl}>Share</button>
+            </div>
+          </div>
         </div>
-        <div className="session-div">
-          <table>
-            <tbody>
-            <tr>
-              <td>
-                <h3 className="inline">People</h3>
-              </td>
-              <td>
-                <div className="inline">
-                  <button onClick={this.handleClick}>Add</button>
-                </div>
-              </td>
-            </tr>
-            {this.getPeopleElement()}
-            </tbody>
-          </table>
-        </div>
-        <div className="session-div">
-          <h3>Dates that work:</h3>
-          {this.getAvailableDates()}
+        <div className="row">
+          <div className="session-div">
+            <table>
+              <tbody>
+              <tr>
+                <td>
+                  <h3 className="inline">People</h3>
+                </td>
+                <td>
+                  <div className="inline">
+                    <button onClick={this.handleClick}>Add</button>
+                  </div>
+                </td>
+              </tr>
+              {this.getPeopleElement()}
+              </tbody>
+            </table>
+          </div>
+          <div className="session-div">
+            <h3>Dates that work:</h3>
+            {this.getAvailableDates()}
+          </div>
         </div>
       </div>
     );
