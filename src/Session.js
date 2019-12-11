@@ -23,16 +23,19 @@ class Session extends Component {
     this.dbRef.on('value', (snapshot) => {
       let people = {};
       let datesArr = [];
+      let dates = [];
       const data = snapshot.val();
-      Object.keys(data).forEach((key) => {
-        people[key] = data[key].name;
-        datesArr.push(data[key].dates);
-      });
-      let dates = datesArr;
-      if (dates.length > 1) {
-        dates = this.intersection(...datesArr);
-      } else {
-        dates = dates[0];
+      if (data !== null) {
+        Object.keys(data).forEach((key) => {
+          people[key] = data[key].name;
+          datesArr.push(data[key].dates);
+        });
+        dates = datesArr;
+        if (dates.length > 1) {
+          dates = this.intersection(...datesArr);
+        } else {
+          dates = dates[0];
+          }
       }
       if (this._isMounted) {
         this.setState({
