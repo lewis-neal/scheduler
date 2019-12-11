@@ -100,20 +100,21 @@ class AddAvailability extends Component {
     return (
       <div>
         <h2>{this.state.name || "Insert Name"}</h2>
-        <div className="row">
-          <label>Name</label>
-          <input onChange={this.changeName} type="text"></input>
+        <div className="availability-top">
+          <label className="availability-label">Name</label>
+          <input className="availability-text" onChange={this.changeName} type="text"></input>
+          <button className="availability-save" onClick={this.saveAvailability}>Save</button>
+          <button onClick={this.backToSession}>Cancel</button>
         </div>
-        <div className="row">
+        <div>
           <div className="session-div">
+            <h3>Dates</h3>
             <Calendar onChange={this.changeDate} value={this.state.date} />
           </div>
           <div className="session-div">
             <h3>Selected Dates</h3>
             {this.handleDates()}
           </div>
-          <button onClick={this.saveAvailability}>Save</button>
-          <button onClick={this.backToSession}>Cancel</button>
         </div>
       </div>
     );

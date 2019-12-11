@@ -128,7 +128,7 @@ class Session extends Component {
           <div className="session-top">
             <h3>Share the link with people you're trying to organise with!</h3>
             <div className="session-link-holder">
-              <input readOnly value={window.location.href} />
+              <input className="availability-text" readOnly value={window.location.href} />
               <button onClick={this.getUrl}>Share</button>
             </div>
           </div>

@@ -23,12 +23,17 @@
   to { transform: rotate(360deg); }
 }
 
+.availability-top {
+  padding-bottom: 3%;
+}
+
+.availability-label, .availability-text, .availability-save {
+  margin-right: 5px;
+}
+
 .column, .session-div {
   float: left;
   padding-left: 25%;
-}
-
-.session-top {
 }
 
 .session-link-holder {
