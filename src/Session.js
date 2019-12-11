@@ -65,7 +65,7 @@ class Session extends Component {
     if (Object.entries(this.state.dates).length > 0) {
       return (
         Object.keys(this.state.dates).map(
-          (id, key) => <li key={key}>{new Date(this.state.dates[id]).toDateString()}</li>
+          (id, key) => <span><p key={key}>{new Date(this.state.dates[id]).toDateString()}</p></span>
         )
       );
     }
@@ -123,21 +123,27 @@ class Session extends Component {
     }
     return (
       <div className="row">
+        <div>
+          <button onClick={this.getUrl}>Share</button>
+        </div>
         <div className="session-div">
-          <div>
-            <h3 className="inline">People</h3>
-            <div className="inline">
-              <button onClick={this.handleClick}>Add</button>
-            </div>
-          </div>
-          {this.getPeopleElement()}
+          <table>
+            <tr>
+              <td>
+                <h3 className="inline">People</h3>
+              </td>
+              <td>
+                <div className="inline">
+                  <button onClick={this.handleClick}>Add</button>
+                </div>
+              </td>
+            </tr>
+            {this.getPeopleElement()}
+          </table>
         </div>
         <div className="session-div">
           <h3>Dates that work:</h3>
           {this.getAvailableDates()}
-        </div>
-        <div>
-          <button onClick={this.getUrl}>Share</button>
         </div>
       </div>
     );

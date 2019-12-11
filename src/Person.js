@@ -7,12 +7,16 @@ class Person extends Component {
 
   render() {
     return (
-      <div>
-        <p className="inline">{this.props.name}</p>
-        <div className="inline">
-          <button onClick={this.remove}>Remove</button>
-        </div>
-      </div>
+      <tr>
+        <td>
+          <p className="inline">{this.props.name}</p>
+        </td>
+        <td>
+          <div className="inline">
+            <button onClick={this.remove}>Remove</button>
+          </div>
+        </td>
+      </tr>
     );
   }
 }

@@ -25,7 +25,7 @@
 
 .column, .session-div {
   float: left;
-  width: 50%;
+  padding-left: 25%;
 }
 
 .inline {
