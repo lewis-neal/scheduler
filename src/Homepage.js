@@ -5,7 +5,7 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        <h1>Scheduler</h1>
+        <h1>Create a session to get started!</h1>
         <CreateSession/>
       </div>
     );

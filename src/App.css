@@ -56,6 +56,11 @@
   margin-right: 5px;
 }
 
+.create-session-button {
+  height: 60px;
+  width: 150px;
+}
+
 .column, .session-div {
   float: left;
   padding-left: 25%;

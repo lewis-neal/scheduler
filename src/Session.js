@@ -123,7 +123,6 @@ class Session extends Component {
     }
     return (
       <div>
-        <h1>Scheduler</h1>
         <div className="row">
           <div className="session-top">
             <h3>Share the link with people you're trying to organise with!</h3>

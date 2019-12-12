@@ -107,8 +107,7 @@ class AddAvailability extends Component {
     }
     return (
       <div>
-        <h1>Add Availability</h1>
-        <h2>{this.state.name || "Insert Name"}</h2>
+        <h3>{this.state.name || "Insert Name"}</h3>
         <div className="availability-top">
           <label className="availability-label">Name</label>
           <input className="availability-text" onChange={this.changeName} type="text"></input>

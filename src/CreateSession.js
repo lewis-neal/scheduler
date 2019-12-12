@@ -31,7 +31,7 @@ class CreateSession extends Component {
 
     return (
       <div>
-        <button onClick={this.handleClick}>Create Session</button>
+        <button className="create-session-button" onClick={this.handleClick}>Create</button>
       </div>
     );
   }
