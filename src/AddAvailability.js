@@ -11,6 +11,7 @@ class AddAvailability extends Component {
       name: '',
       dates: [],
       redirect: false,
+      hasValidName: false,
     };
 
     this.dbRef = firebase.database().ref().child('sessions/' + props.match.params.id);
@@ -41,7 +42,11 @@ class AddAvailability extends Component {
   }
 
   changeName = (event) => {
-    this.setState({name: event.target.value});
+    const validNameRegex = new RegExp('^[a-zA-Z0-9]+[a-zA-Z0-9 ]*$');
+    this.setState({
+      name: event.target.value.trim(),
+      hasValidName: validNameRegex.test(event.target.value),
+    });
   };
 
   displayRemoveAll() {
@@ -107,7 +112,7 @@ class AddAvailability extends Component {
         <div className="availability-top">
           <label className="availability-label">Name</label>
           <input className="availability-text" onChange={this.changeName} type="text"></input>
-          <button className="availability-save" onClick={this.saveAvailability}>Save</button>
+          <button className="availability-save" disabled={!this.state.hasValidName} onClick={this.saveAvailability}>Save</button>
           <button onClick={this.backToSession}>Cancel</button>
         </div>
         <div>
