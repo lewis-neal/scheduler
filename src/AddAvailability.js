@@ -115,13 +115,17 @@ class AddAvailability extends Component {
           <button className="availability-save" disabled={!this.state.hasValidName} onClick={this.saveAvailability}>Save</button>
           <button onClick={this.backToSession}>Cancel</button>
         </div>
-        <div>
-          <div className="session-div">
+        <div className="row">
+          <div className="availability-col">
             <h3>Dates</h3>
-            <Calendar onChange={this.changeDate} value={this.state.date} />
+            <Calendar
+              className="availability-calendar"
+              minDate={new Date()}
+              onChange={this.changeDate}
+              value={this.state.date} />
           </div>
-          <div className="session-div">
-            <table>
+          <div className="availability-col">
+            <table className="availability-table">
               <tbody>
                 <tr>
                   <td>

@@ -23,6 +23,31 @@
   to { transform: rotate(360deg); }
 }
 
+.availability-col {
+  float: left;
+  width: 50%;
+}
+
+.availability-col:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .availability-col {
+    width: 100%;
+  }
+}
+
+.availability-calendar {
+  margin: auto;
+}
+
+.availability-table {
+  width: 100%;
+}
+
 .availability-top {
   padding-bottom: 3%;
 }
