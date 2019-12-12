@@ -58,7 +58,17 @@ class Session extends Component {
         )
       );
     }
-    return (null);
+    return this.getNoPeopleElement();
+  }
+
+  getNoPeopleElement() {
+    return (
+       <tr>
+        <td>
+          <p>No people listed</p>
+        </td>
+      </tr>
+    );
   }
 
   getAvailableDates() {
@@ -69,7 +79,7 @@ class Session extends Component {
         )
       );
     }
-    return (null);
+    return this.getNoPeopleElement();
   }
 
   getUrl() {
