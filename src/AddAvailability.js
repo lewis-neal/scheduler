@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import firebase from './Firebase';
 import { Redirect } from 'react-router-dom';
-import DateListing from './DateListing';
+import DateHolder from './DateHolder';
 
 class AddAvailability extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class AddAvailability extends Component {
   handleDates = () => {
     if (typeof this.state.dates !== 'undefined' && Object.entries(this.state.dates).length > 0) {
       return (
-        this.state.dates.map((date, id) => <DateListing key={id} date={date} index={id} handleClick={this.removeDate} />)
+        <DateHolder dates={this.state.dates} removeDate={this.removeDate} />
       );
     }
 
