@@ -15,6 +15,17 @@ class CreateSession extends Component {
     this.setState({
       redirect: true,
     });
+
+    this.dbRef.once('value').then((result) => {
+      let data = result.val();
+      let cutOff = new Date();
+      cutOff.setDate(cutOff.getDate() - 1);
+      Object.keys(data).forEach((id) => {
+        if (new Date(data[id].timestamp) < cutOff) {
+          this.dbRef.child(id).remove();
+        }
+      });
+    });
   }
 
   render() {
