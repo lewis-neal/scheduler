@@ -58,16 +58,18 @@ class Session extends Component {
         )
       );
     }
-    return this.getNoPeopleElement();
+    return (
+       <tr>
+        <td>
+            {this.getNoPeopleElement()}
+        </td>
+      </tr>
+    );
   }
 
   getNoPeopleElement() {
     return (
-       <tr>
-        <td>
-          <p>No people listed</p>
-        </td>
-      </tr>
+      <p>No people listed</p>
     );
   }
 
