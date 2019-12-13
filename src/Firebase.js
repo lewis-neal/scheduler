@@ -2,10 +2,10 @@ import * as firebase from 'firebase/app';
 import 'firebase/database';
 
 var firebaseConfig = {
-  apiKey: "AIzaSyAhN0IcVrgBKD5U6KBebY9sWM-_DpxQ6sQ",
-  databaseURL: "https://scheduler-85cc7.firebaseio.com",
-  projectId: "scheduler-85cc7",
-  appId: "1:401148320864:web:476dd010a9c0085d557705",
+  apiKey: process.env.REACT_APP_API_KEY,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
