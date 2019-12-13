@@ -1,4 +1,5 @@
 {
+  "homepage": "https://lewis-neal.github.io/scheduler",
   "name": "scheduler",
   "version": "0.1.0",
   "private": true,
@@ -12,12 +13,16 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "0.9.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "docker": "docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm scheduler:dev"
+    "docker": "docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm scheduler:dev",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
