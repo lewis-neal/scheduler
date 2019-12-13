@@ -21,6 +21,7 @@ class CreateSession extends Component {
     if (this.state.redirect) {
       const session = {
         'people': '',
+        'timestamp': new Date().toJSON(),
       };
       let sessionId = this.dbRef.push(session).key;
       let path = '/session/' + sessionId;
