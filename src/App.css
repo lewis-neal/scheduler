@@ -22,3 +22,56 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.availability-col {
+  float: left;
+  width: 50%;
+}
+
+.availability-col:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .availability-col {
+    width: 100%;
+  }
+}
+
+.availability-calendar {
+  margin: auto;
+}
+
+.availability-table {
+  width: 100%;
+}
+
+.availability-top {
+  padding-bottom: 3%;
+}
+
+.availability-label, .availability-text, .availability-save {
+  margin-right: 5px;
+}
+
+.create-session-button {
+  height: 60px;
+  width: 150px;
+}
+
+.column, .session-div {
+  float: left;
+  padding-left: 25%;
+}
+
+.session-link-holder {
+  padding-bottom: 3%;
+}
+
+.inline {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+}
