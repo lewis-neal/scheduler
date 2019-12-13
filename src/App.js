@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import Homepage from './Homepage';
@@ -11,11 +11,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>Scheduler</h1>
-        </div>
         <Router>
+          <div className="App-header">
+            <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
+            <h1>Scheduler</h1>
+          </div>
           <Route path="/session/:id" exact component={Session}/>
           <Route path="/" exact component={Homepage}/>
           <Route path="/session/:id/availability" exact component={AddAvailability}/>
