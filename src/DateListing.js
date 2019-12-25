@@ -1,6 +1,9 @@
 import React from 'react';
 
 function DateListing(props) {
+  function removeDate() {
+    props.handleClick(props.index);
+  }
   return (
     <tr>
       <td>
@@ -8,7 +11,7 @@ function DateListing(props) {
       </td>
       <td>
         <div className="inline">
-          <button onClick={props.handleClick} value={props.id}>Remove</button>
+          <button onClick={removeDate}>Remove</button>
         </div>
       </td>
     </tr>
