@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import firebase from './Firebase';
 import Person from './Person';
-import copy from 'copy-to-clipboard';
+import Share from './Share';
 import { intersection  } from './Utilities';
 
 function Session(props) {
@@ -47,10 +47,6 @@ function Session(props) {
     return getNoPeopleElement();
   }
 
-  function getUrl() {
-    copy(window.location.href);
-  }
-
   function handleClick() {
     setRedirect(true);
   };
@@ -91,15 +87,7 @@ function Session(props) {
 
   return (
     <div>
-      <div className="row">
-        <div className="session-top">
-          <h3>Share the link with people you're trying to organise with!</h3>
-          <div className="session-link-holder">
-            <input className="availability-text" readOnly value={window.location.href} />
-            <button onClick={getUrl}>Share</button>
-          </div>
-        </div>
-      </div>
+      <Share />
       <div className="row">
         <div className="session-div">
           <table>
