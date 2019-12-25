@@ -1,100 +1,18 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import firebase from './Firebase';
 import Person from './Person';
 import copy from 'copy-to-clipboard';
 
-class Session extends Component {
-  constructor(props) {
-    super();
-    this.dbRef = firebase.database().ref().child(
-      'sessions/' + props.match.params.id + '/people'
-    );
+function Session(props) {
+  const [redirect, setRedirect] = useState(false);
+  const [people, setPeople] = useState({});
+  const [dates, setDates] = useState([]);
+  const dbRef = firebase.database().ref().child(
+    'sessions/' + props.match.params.id + '/people'
+  );
 
-    this.state = {
-      redirect: false,
-      people: {},
-      dates: []
-    };
-  }
-
-  componentDidMount() {
-    this._isMounted = true;
-    this.dbRef.on('value', (snapshot) => {
-      let people = {};
-      let datesArr = [];
-      let dates = [];
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.keys(data).forEach((key) => {
-          people[key] = data[key].name;
-          datesArr.push(data[key].dates);
-        });
-        dates = datesArr;
-        if (dates.length > 1) {
-          dates = this.intersection(...datesArr);
-        } else {
-          dates = dates[0];
-          }
-      }
-      if (this._isMounted) {
-        this.setState({
-          people: people,
-          dates: dates,
-        });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  getPeopleElement() {
-    if (typeof this.state.people !== 'undefined' && Object.entries(this.state.people).length > 0) {
-      return (
-        Object.keys(this.state.people).map(
-          (id, key) => <Person key={key} id={id} dbRef={this.dbRef} name={this.state.people[id]} />
-        )
-      );
-    }
-    return (
-       <tr>
-        <td>
-            {this.getNoPeopleElement()}
-        </td>
-      </tr>
-    );
-  }
-
-  getNoPeopleElement() {
-    return (
-      <p>No people listed</p>
-    );
-  }
-
-  getAvailableDates() {
-    if (typeof this.state.dates !== 'undefined' && Object.entries(this.state.dates).length > 0) {
-      return (
-        Object.keys(this.state.dates).map(
-          (id, key) => <span key={key}><p>{new Date(this.state.dates[id]).toDateString()}</p></span>
-        )
-      );
-    }
-    return this.getNoPeopleElement();
-  }
-
-  getUrl() {
-    copy(window.location.href);
-  }
-
-  handleClick = () => {
-    this.setState({
-      redirect: true,
-    });
-  };
-
-  intersection() {
+  function intersection() {
     let result = [];
     let lists;
 
@@ -125,51 +43,118 @@ class Session extends Component {
     return result;
   }
 
-  render() {
-    let id = typeof this.props.match.params.id !== 'undefined' ? this.props.match.params.id : '';
-    if (this.state.redirect) {
-      let path = '/session/' + id + '/availability';
+  function getPeopleElement() {
+    if (typeof people !== 'undefined' && Object.entries(people).length > 0) {
       return (
-        <Redirect push to={path} />
+        Object.keys(people).map(
+          (id, key) => <Person key={key} id={id} dbRef={dbRef} name={people[id]} />
+        )
       );
     }
     return (
-      <div>
-        <div className="row">
-          <div className="session-top">
-            <h3>Share the link with people you're trying to organise with!</h3>
-            <div className="session-link-holder">
-              <input className="availability-text" readOnly value={window.location.href} />
-              <button onClick={this.getUrl}>Share</button>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="session-div">
-            <table>
-              <tbody>
-              <tr>
-                <td>
-                  <h3 className="inline">People</h3>
-                </td>
-                <td>
-                  <div className="inline">
-                    <button onClick={this.handleClick}>Add</button>
-                  </div>
-                </td>
-              </tr>
-              {this.getPeopleElement()}
-              </tbody>
-            </table>
-          </div>
-          <div className="session-div">
-            <h3>Dates that work:</h3>
-            {this.getAvailableDates()}
+       <tr>
+        <td>
+            {getNoPeopleElement()}
+        </td>
+      </tr>
+    );
+  }
+
+  function getNoPeopleElement() {
+    return (
+      <p>No people listed</p>
+    );
+  }
+
+  function getAvailableDates() {
+    if (typeof dates !== 'undefined' && Object.entries(dates).length > 0) {
+      return (
+        Object.keys(dates).map(
+          (id, key) => <span key={key}><p>{new Date(dates[id]).toDateString()}</p></span>
+        )
+      );
+    }
+    return getNoPeopleElement();
+  }
+
+  function getUrl() {
+    copy(window.location.href);
+  }
+
+  function handleClick() {
+    setRedirect(true);
+  };
+
+  useEffect(() => {
+    dbRef.on('value', (snapshot) => {
+      let people = {};
+      let datesArr = [];
+      let dates = [];
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.keys(data).forEach((key) => {
+          people[key] = data[key].name;
+          datesArr.push(data[key].dates);
+        });
+        dates = datesArr;
+        if (dates.length > 1) {
+          dates = intersection(...datesArr);
+        } else {
+          dates = dates[0];
+        }
+      }
+      setPeople(people);
+      setDates(dates);
+    });
+    return function cleanup() {
+      dbRef.off('value');
+    };
+  }, []);
+
+  const id = typeof props.match.params.id !== 'undefined' ? props.match.params.id : '';
+  if (redirect) {
+    const path = '/session/' + id + '/availability';
+    return (
+      <Redirect push to={path} />
+    );
+  }
+
+  return (
+    <div>
+      <div className="row">
+        <div className="session-top">
+          <h3>Share the link with people you're trying to organise with!</h3>
+          <div className="session-link-holder">
+            <input className="availability-text" readOnly value={window.location.href} />
+            <button onClick={getUrl}>Share</button>
           </div>
         </div>
       </div>
-    );
-  }
+      <div className="row">
+        <div className="session-div">
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                <h3 className="inline">People</h3>
+              </td>
+              <td>
+                <div className="inline">
+                  <button onClick={handleClick}>Add</button>
+                </div>
+              </td>
+            </tr>
+            {getPeopleElement()}
+            </tbody>
+          </table>
+        </div>
+        <div className="session-div">
+          <h3>Dates that work:</h3>
+          {getAvailableDates()}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Session;
