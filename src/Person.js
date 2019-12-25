@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Person extends Component {
-  remove = () => {
-    this.props.dbRef.child(this.props.id).remove();
+function Person(props) {
+  function remove() {
+    props.dbRef.child(props.id).remove();
   }
 
-  render() {
-    return (
-      <tr>
-        <td>
-          <p className="inline">{this.props.name}</p>
-        </td>
-        <td>
-          <div className="inline">
-            <button onClick={this.remove}>Remove</button>
-          </div>
-        </td>
-      </tr>
-    );
-  }
+  return (
+    <tr>
+      <td>
+        <p className="inline">{props.name}</p>
+      </td>
+      <td>
+        <div className="inline">
+          <button onClick={remove}>Remove</button>
+        </div>
+      </td>
+    </tr>
+  );
 }
 
 export default Person;
