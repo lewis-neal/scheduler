@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import firebase from './Firebase';
 import PersonHolder from './PersonHolder';
+import Dates from './Dates';
 import Share from './Share';
 import { intersection  } from './Utilities';
 
@@ -17,17 +18,6 @@ function Session(props) {
     return (
       <p>No people listed</p>
     );
-  }
-
-  function getAvailableDates() {
-    if (typeof dates !== 'undefined' && Object.entries(dates).length > 0) {
-      return (
-        Object.keys(dates).map(
-          (id, key) => <span key={key}><p>{new Date(dates[id]).toDateString()}</p></span>
-        )
-      );
-    }
-    return getNoPeopleElement();
   }
 
   function handleClick() {
@@ -91,7 +81,7 @@ function Session(props) {
         </div>
         <div className="session-div">
           <h3>Dates that work:</h3>
-          {getAvailableDates()}
+          <Dates dates={dates} getNoPeopleElement={getNoPeopleElement} />
         </div>
       </div>
     </div>
