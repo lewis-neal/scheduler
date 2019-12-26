@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import firebase from './Firebase';
-import Person from './Person';
+import PersonHolder from './PersonHolder';
 import Share from './Share';
 import { intersection  } from './Utilities';
 
@@ -12,23 +12,6 @@ function Session(props) {
   const dbRef = firebase.database().ref().child(
     'sessions/' + props.match.params.id + '/people'
   );
-
-  function getPeopleElement() {
-    if (typeof people !== 'undefined' && Object.entries(people).length > 0) {
-      return (
-        Object.keys(people).map(
-          (id, key) => <Person key={key} id={id} dbRef={dbRef} name={people[id]} />
-        )
-      );
-    }
-    return (
-       <tr>
-        <td>
-            {getNoPeopleElement()}
-        </td>
-      </tr>
-    );
-  }
 
   function getNoPeopleElement() {
     return (
@@ -102,7 +85,7 @@ function Session(props) {
                 </div>
               </td>
             </tr>
-            {getPeopleElement()}
+            <PersonHolder dbRef={dbRef} getNoPeopleElement={getNoPeopleElement} people={people} />
             </tbody>
           </table>
         </div>
