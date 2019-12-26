@@ -61,6 +61,10 @@
   width: 150px;
 }
 
+.create-session-name {
+  margin-bottom: 10px;
+}
+
 .column, .session-div {
   float: left;
   padding-left: 25%;

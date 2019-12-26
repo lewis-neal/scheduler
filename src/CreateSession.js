@@ -5,6 +5,14 @@ import firebase from './Firebase';
 function CreateSession() {
   const dbRef = firebase.database().ref().child('sessions');
   const [redirect, setRedirect] = useState(false);
+  const [sessionName, setSessionName] = useState('');
+  const [hasValidSessionName, setHasValidSessionName] = useState(false);
+
+  function changeSessionName(event) {
+    const validSessionNameRegex = new RegExp('^[a-zA-Z0-9]+[a-zA-Z0-9 ]*$');
+    setSessionName(event.target.value);
+    setHasValidSessionName(validSessionNameRegex.test(event.target.value));
+  }
 
   function handleClick() {
     setRedirect(true);
@@ -22,6 +30,7 @@ function CreateSession() {
 
   if (redirect) {
     const session = {
+      'name': sessionName,
       'people': '',
       'timestamp': new Date().toJSON(),
     };
@@ -34,7 +43,13 @@ function CreateSession() {
 
   return (
     <div>
-      <button className="create-session-button" onClick={handleClick}>Create</button>
+      <div>
+        <h3>Session Name</h3>
+        <input className="create-session-name" type="text" onChange={changeSessionName} />
+      </div>
+      <div>
+        <button className="create-session-button" disabled={!hasValidSessionName} onClick={handleClick}>Create</button>
+      </div>
     </div>
   );
 }

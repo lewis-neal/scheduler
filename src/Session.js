@@ -10,9 +10,15 @@ function Session(props) {
   const [redirect, setRedirect] = useState(false);
   const [people, setPeople] = useState({});
   const [dates, setDates] = useState([]);
-  const dbRef = firebase.database().ref().child(
-    'sessions/' + props.match.params.id + '/people'
+  let dbRef = firebase.database().ref().child(
+    'sessions/' + props.match.params.id
   );
+  const [sessionName, setSessionName] = useState('');
+  dbRef.child('/name').once('value').then((result) => {
+    const data = result.val();
+    setSessionName(data);
+  });
+  dbRef = dbRef.child('/people');
 
   function getNoPeopleElement() {
     return (
@@ -61,6 +67,7 @@ function Session(props) {
   return (
     <div>
       <Share />
+      <h2>{sessionName}</h2>
       <div className="row">
         <div className="session-div">
           <table>
