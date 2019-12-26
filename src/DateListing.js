@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class DateListing extends Component {
-  render() {
-    return (
-      <tr>
-        <td>
-          <p className="inline">{this.props.date.toDateString()}</p>
-        </td>
-        <td>
-          <div className="inline">
-            <button onClick={this.props.handleClick} value={this.props.id}>Remove</button>
-          </div>
-        </td>
-      </tr>
-    );
+function DateListing(props) {
+  function removeDate() {
+    props.handleClick(props.index);
   }
+  return (
+    <tr>
+      <td>
+        <p className="inline">{props.date.toDateString()}</p>
+      </td>
+      <td>
+        <div className="inline">
+          <button onClick={removeDate}>Remove</button>
+        </div>
+      </td>
+    </tr>
+  );
 }
 
 export default DateListing;
