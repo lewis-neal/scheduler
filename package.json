@@ -1,5 +1,5 @@
 {
-  "homepage": "https://lewis-neal.github.io/scheduler",
+  "homepage": "https://lneal.dev",
   "name": "scheduler",
   "version": "0.1.0",
   "private": true,
@@ -24,5 +24,17 @@
     "docker": "docker run -v ${PWD}:/app -v /app/node_modules -p 3001:3000 --rm scheduler:dev",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
